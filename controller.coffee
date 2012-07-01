@@ -35,7 +35,7 @@ exports.start = (app) ->
                         if !success
                             result = "fail"
                             return
-                        if req.body.output == out
+                        if req.body.output.replace(/\s+$/, '') == out.replace(/\s+$/, '')
                             result = "ok"
                         else
                             result = "ng"
