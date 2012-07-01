@@ -1,20 +1,34 @@
 <% title = 'Problem' %>
-<% description_text = "explain the problem" %>
-<% first_message = "write your code" %>
 <% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
-<h1>Problem Sample</h1>
+<h1><%= problem.id %> - <%= problem.title %></h1>
 
 <h2>Description</h2>
 <TEXTAREA cols="40" rows="6" wrap="off">
-  <%= description_text %>
+  <%= problem.description_text %>
 </TEXTAREA>
-
 
 <br><br>
 
-<h2>Code</h2>
+<form action="/problems/<%= problem.id %>/run" method="post">
+Input:
+<br>
+<TEXTAREA cols="40" rows="2" wrap="off">
+  <%= problem.input %>
+</TEXTAREA>
+<br><br>
+
+Output:
+<br>
+<TEXTAREA cols="40" rows="2" wrap="off">
+  <%= problem.output %>
+</TEXTAREA>
+
+<br><br>
+
+Code:
+<br>
 <TEXTAREA cols="40" rows="6" wrap="off">
-  <%= first_message %>
+  <%= problem.first_message %>
 </TEXTAREA>
 
 <br>
@@ -23,4 +37,5 @@
 
 <br>
 
+</form>
 <%= copyright %>
