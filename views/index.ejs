@@ -1,7 +1,12 @@
+<% title = 'Hello, world' %>
+
+<% first_message = "ask your matter!" %>
 <% var data = ["problem"]; %>
 <% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
 
 <h1>Almond Choco</h1>
+
+<h2>Issued Problems</h2>
 <ul>
   <% for(var i = 0; i < data.length; i++) { %>
     <li>
@@ -9,14 +14,15 @@
     </li>
   <% } %>
 </ul>
-<% title = 'Hello, world' %>
 
+<h2>Issue New Problem</h2>
+<TEXTAREA cols="40" rows="6" wrap="off">
+  <%= first_message %>
+</TEXTAREA>
+<br>
+<BUTTON type="submit">SUBMIT</BUTTON>
+
+<br>
 
 <%= copyright %>
 
-
-<!--
-<h1>TEST</h1>
-<%- mes %>
-<%= mes %>
--->
