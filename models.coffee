@@ -19,6 +19,8 @@ Submit = new Schema
 Problem = new Schema
   title: String
   description: String
+  input: String
+  output: String
   testCases: [TestCase]
   comments: [Comment]
   submits: [Submit]
