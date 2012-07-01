@@ -16,11 +16,13 @@
 </ul>
 
 <h2>Issue New Problem</h2>
-<TEXTAREA cols="40" rows="6" wrap="off">
-  <%= first_message %>
-</TEXTAREA>
-<br>
-<BUTTON type="submit">SUBMIT</BUTTON>
+<form action="problems" method="post">
+  title:<br><input name=title><br>
+  description:<br><textarea name=description></textarea><br>
+  input:<br><textarea name=input></textarea><br>
+  output:<br><textarea name=output></textarea><br>
+  <button type="submit">submit</button>
+</form>
 
 <br>
 
