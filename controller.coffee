@@ -36,9 +36,24 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/run', (req, res) ->
-#    ide = new Ideone('username', 'pass');
-    result = req.body.params.input
-    res.render('result.ejs', {locals:{result:result}})
+    ide = new Ideone('username', 'pass');
+    ide.execute(4,
+                req.body.code,
+                req.body.input,
+                (success, output) ->
+                        if !success
+                            result = "ng"
+                            return
+                       out = output
+                       if req.body.output == output
+                            result = "ok"
+                       else
+                            result = "ng"
+                            res.render('result.ejs', {locals:{
+                                result:result,
+                                out:out
+                            }})
+                )
 
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
