@@ -9,10 +9,10 @@ exports.start = (app) ->
     models.Problem.find {}, (err, docs) ->
       mes = "<p>hello world?</p>"
       problems = docs
-        res.render('index.ejs', {locals:{
-            mes:mes,
-            problems:problems
-        }})
+      res.render('index.ejs', {locals:{
+          mes:mes,
+          problems:problems
+      }})
 
 
   app.get '/login', (req, res) ->
