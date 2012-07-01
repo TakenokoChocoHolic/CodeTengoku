@@ -23,12 +23,9 @@ commentSchema.pre('save', function(next) {
     next();
 });
 
-// Connect MongoDB
-app.configure(function() {
-    //mongodb://[hostname]/[dbname]
-    mongoose.connect(uri);
-    mongoose.model('Comment', commentSchema);
-});
+// Connect MongoDB (mongodb://[hostname]/[dbname])
+mongoose.connect(uri);
+mongoose.model('Comment', commentSchema);
 
 // Initialize model accessors
 var Comment = mongoose.model('Comment');
