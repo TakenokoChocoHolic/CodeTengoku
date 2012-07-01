@@ -1,4 +1,8 @@
 models = require './models'
+ideone = require './ideone.coffee'
+
+user = 'exkazuu'
+pass = 'almond-choco'
 
 exports.start = (app) ->
   app.get '/', (req, res) ->
@@ -28,8 +32,23 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/run', (req, res) ->
-    result = "ok"
-    res.render('result.ejs', {locals:{result:result}})
+    ide = new ideone.Ideone(user, pass);
+    ide.execute(4,
+                req.body.code,
+                req.body.input,
+                (success, out) ->
+                        if !success
+                            result = "ng"
+                            return
+                        if req.body.output == out
+                            result = "ok"
+                       else
+                            result = "ng"
+                            res.render('result.ejs', {locals:{
+                                result:result,
+                                out:out
+                            }})
+                )
 
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
