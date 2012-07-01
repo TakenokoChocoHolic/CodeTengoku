@@ -44,12 +44,11 @@ exports.start = (app) ->
     ide.execute(4,
                 req.body.code,
                 req.body.input,
-                (success, output) ->
+                (success, out) ->
                         if !success
                             result = "ng"
                             return
-                       out = output
-                       if req.body.output == output
+                        if req.body.output == out
                             result = "ok"
                        else
                             result = "ng"
