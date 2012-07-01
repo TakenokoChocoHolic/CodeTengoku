@@ -35,3 +35,11 @@ exports.start = (app) ->
 
   app.get '/funny_api', (req, res) ->
     res.render('funny_api.ejs', {locals:{mes:''}})
+
+  app.get '/debug', (req, res) ->
+    console.log(req.query)
+    res.render('debug.ejs', {locals:{mes:'debug'}})
+
+  app.post '/problems', (req, res) ->
+    console.log(req.body)
+    res.render('debug.ejs', {locals:{mes:'hoge'}})
