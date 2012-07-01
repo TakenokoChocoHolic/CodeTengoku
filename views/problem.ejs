@@ -1,6 +1,8 @@
 <% title = 'Problem' %>
 <% description_text = "explain the problem" %>
 <% first_message = "write your code" %>
+<% input_text = "1 2" %>
+<% output_text = "3" %>
 <% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
 <h1>Problem Sample</h1>
 
@@ -9,10 +11,25 @@
   <%= description_text %>
 </TEXTAREA>
 
+<br><br>
+
+Input:
+<br>
+<TEXTAREA cols="40" rows="2" wrap="off">
+  <%= input_text %>
+</TEXTAREA>
+<br><br>
+
+Output:
+<br>
+<TEXTAREA cols="40" rows="2" wrap="off">
+  <%= output_text %>
+</TEXTAREA>
 
 <br><br>
 
-<h2>Code</h2>
+Code:
+<br>
 <TEXTAREA cols="40" rows="6" wrap="off">
   <%= first_message %>
 </TEXTAREA>
