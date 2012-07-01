@@ -1,18 +1,18 @@
 express = require('express')
 mongoose = require('mongoose')
 
-// Define schemas
+# Define schemas
 Schema = mongoose.Schema
 commentSchema = new Schema
   body :String
   date :Date
 
 
-// Initialize the uri for MongoDB
-uri = process.env.MONGOLAB_URI or 'mongodb://localhost/mongo_data'
+# Initialize the uri for MongoDB
+uri = process.env.MONGOLAB_URI or 'mongodb:#localhost/mongo_data'
 console.log(uri)
 
-// Set up a logger for mongoose
+# Set up a logger for mongoose
 commentSchema.pre 'init', (next) ->
   console.log('initialized')
   next()
@@ -22,20 +22,21 @@ commentSchema.pre 'save', (next) ->
   next()
 
 
-// Connect MongoDB (mongodb://[hostname]/[dbname])
+# Connect MongoDB (mongodb:#[hostname]/[dbname])
 mongoose.connect(uri)
 mongoose.model('Comment', commentSchema)
 
-// Initialize model accessors
+# Initialize model accessors
 Comment = mongoose.model('Comment')
 
 app = express.createServer(express.logger())
 
 app.get '/', (req, res) ->
-  // Add new comment record for testing
+  # Add new comment record for testing
   comment = new Comment()
-  comment.body = sanitizedMsg
-  comment.date = date
+  comment.body = "test"
+  comment.date = new Date
+  console.log(comment)
   comment.save (err) ->
     console.log('save.') if !err
 
