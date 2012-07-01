@@ -35,6 +35,10 @@ exports.start = (app) ->
       output : "3"
     res.render('problem.ejs', {locals:{problem:problem}})
 
+  app.post '/problems/:id/run', (req, res) ->
+    result = "ok"
+    res.render('result.ejs', {locals:{result:result}})
+
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
     res.render('index.ejs', {locals:{mes:mes}})
