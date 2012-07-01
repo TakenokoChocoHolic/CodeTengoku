@@ -10,8 +10,14 @@ exports.start = (app) ->
     comment.save (err) ->
       console.log('save.') if !err
 
+    problems = [1, 2, 3, 4, 5]
     mes = "<p>hello world?</p>"
-    res.render('index.ejs', {locals:{mes:mes}})
+
+    res.render('index.ejs', {locals:{
+        mes:mes,
+        problems:problems
+    }})
+
 
   app.get '/login', (req, res) ->
     res.render('login.ejs', {locals:{mes:''}})
