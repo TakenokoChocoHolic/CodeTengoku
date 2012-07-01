@@ -36,7 +36,8 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/run', (req, res) ->
-    result = "ok"
+#    ide = new Ideone('username', 'pass');
+    result = req.body.params.input
     res.render('result.ejs', {locals:{result:result}})
 
   app.get '/problem_set', (req, res) ->
