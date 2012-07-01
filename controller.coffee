@@ -20,7 +20,14 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{mes:''}})
 
   app.get '/problem/:id', (req, res) ->
-    res.render('problem.ejs', {locals:{mes:"No.#{req.params.id} problem."}})
+    problem =
+      id : req.params.id
+      title : "problem title"
+      description_text : "explain the problem"
+      first_message : "write your code"
+      input : "1 2"
+      output : "3"
+    res.render('problem.ejs', {locals:{problem:problem}})
 
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
