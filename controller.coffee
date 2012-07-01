@@ -6,21 +6,13 @@ pass = 'almond-choco'
 
 exports.start = (app) ->
   app.get '/', (req, res) ->
-    # Add new comment record for testing
-    comment = new models.Comment()
-    comment.body = "test"
-    comment.date = new Date
-    console.log(comment)
-    comment.save (err) ->
-      console.log('save.') if !err
-
-    problems = [1, 2, 3, 4, 5]
-    mes = "<p>hello world?</p>"
-
-    res.render('index.ejs', {locals:{
-        mes:mes,
-        problems:problems
-    }})
+    models.Problem.find {}, (err, docs) ->
+      mes = "<p>hello world?</p>"
+      problems = docs
+      res.render('index.ejs', {locals:{
+          mes:mes,
+          problems:problems
+      }})
 
 
   app.get '/login', (req, res) ->
@@ -30,14 +22,9 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{mes:''}})
 
   app.get '/problem/:id', (req, res) ->
-    problem =
-      id : req.params.id
-      title : "problem title"
-      description_text : "explain the problem"
-      first_message : "write your code"
-      input : "1 2"
-      output : "3"
-    res.render('problem.ejs', {locals:{problem:problem}})
+    id = req.params.id
+    models.Problem.find {id:id}, (err, docs) ->
+      res.render('problem.ejs', {locals:{problem:docs[0]}})
 
   app.post '/problems/:id/run', (req, res) ->
     ide = new ideone.Ideone(user, pass);
@@ -78,7 +65,6 @@ exports.start = (app) ->
     problem.title = req.body.title
     problem.description = req.body.description
     problem.date = new Date
-    console.log(problem)
     problem.save (err) ->
-      console.log('save failed')
+      console.log('save failed') if err
     res.render('debug.ejs', {locals:{mes:req.body.title}})
