@@ -20,7 +20,7 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{mes:''}})
 
   app.get '/problem/:id', (req, res) ->
-    res.render('problem.ejs', {locals:{mes:"No.#{req.params.id} problem."}})
+    res.render('debug.ejs', {locals:{mes:"No.#{req.params.id} problem."}})
 
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
@@ -28,3 +28,11 @@ exports.start = (app) ->
 
   app.get '/funny_api', (req, res) ->
     res.render('funny_api.ejs', {locals:{mes:''}})
+
+  app.get '/debug', (req, res) ->
+    console.log(req.query)
+    res.render('debug.ejs', {locals:{mes:'debug'}})
+
+  app.post '/problems', (req, res) ->
+    console.log(req.body)
+    res.render('debug.ejs', {locals:{mes:'hoge'}})
