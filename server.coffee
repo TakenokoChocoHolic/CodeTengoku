@@ -43,6 +43,9 @@ app.get '/', (req, res) ->
   mes = "<p>hello world?</p>"
   res.render('index.ejs', {locals:{mes:mes}})
 
+app.get '/login', (req, res) ->
+  res.render('login.ejs', {locals:{mes:''}})
+
 app.get '/problem_set', (req, res) ->
   mes = "<p>Problem set!</p>"
   res.render('index.ejs', {locals:{mes:mes}})
