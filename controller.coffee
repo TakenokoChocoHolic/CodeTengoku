@@ -47,7 +47,10 @@ exports.start = (app) ->
     res.render('funny_api.ejs', {locals:{mes:''}})
 
   app.get '/debug', (req, res) ->
-    console.log(req.query)
+    console.log "load?"
+    models.User.find {}, (err, docs) ->
+      console.log "load!"
+      console.log(docs)
     res.render('debug.ejs', {locals:{mes:'debug'}})
 
   app.post '/problems', (req, res) ->
@@ -55,4 +58,7 @@ exports.start = (app) ->
     problem.title = req.body.title
     problem.description = req.body.description
     problem.date = new Date
+    console.log(problem)
+    problem.save (err) ->
+      console.log('save failed')
     res.render('debug.ejs', {locals:{mes:req.body.title}})
