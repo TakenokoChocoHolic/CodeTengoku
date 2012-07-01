@@ -61,10 +61,14 @@ exports.start = (app) ->
     res.render('debug.ejs', {locals:{mes:'debug'}})
 
   app.post '/problems', (req, res) ->
+    testcase = models.TestCase
+      inputText:  req.body.input
+      outputText: req.body.output
     problem = new models.Problem
-    problem.title = req.body.title
-    problem.description = req.body.description
-    problem.date = new Date
+      title:       req.body.title
+      description: req.body.description
+      testCases:   [testcase]
+      date:        new Date
     problem.save (err) ->
       console.log('save failed') if err
     res.render('debug.ejs', {locals:{mes:req.body.title}})
