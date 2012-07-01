@@ -23,8 +23,8 @@ exports.start = (app) ->
 
   app.get '/problem/:id', (req, res) ->
     id = req.params.id
-    models.Problem.find {id:id}, (err, docs) ->
-      res.render('problem.ejs', {locals:{problem:docs[0]}})
+    models.Problem.findById id, (err, docs) ->
+      res.render('problem.ejs', {locals:{problem:docs}})
 
   app.post '/problems/:id/run', (req, res) ->
     ide = new ideone.Ideone(user, pass);
