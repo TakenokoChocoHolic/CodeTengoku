@@ -45,7 +45,6 @@ app.get('/', function(req, res) {
     res.render('index.ejs', {locals:{mes:mes}});
 });
 
-
 app.get('/problem_set', function(req, res) {
     var mes = "<p>Problem set!</p>";
     res.render('index.ejs', {locals:{mes:mes}});
