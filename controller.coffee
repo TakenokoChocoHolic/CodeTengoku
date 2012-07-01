@@ -46,16 +46,17 @@ exports.start = (app) ->
                 req.body.input,
                 (success, out) ->
                         if !success
-                            result = "ng"
+                            result = "fail"
                             return
                         if req.body.output == out
                             result = "ok"
-                       else
+                        else
                             result = "ng"
-                            res.render('result.ejs', {locals:{
+                        res.render('result.ejs', {locals:{
                                 result:result,
                                 out:out
-                            }})
+                                ex:req.body.output
+                        }})
                 )
 
   app.get '/problem_set', (req, res) ->
