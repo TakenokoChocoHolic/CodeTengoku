@@ -22,6 +22,15 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{mes:''}})
 
   app.get '/problem/:id', (req, res) ->
+    problem =
+      id : req.params.id
+      title : "problem title"
+      description_text : "explain the problem"
+      first_message : "write your code"
+      input : "1 2"
+      output : "3"
+    res.render('problem.ejs', {locals:{problem:problem}})
+    return
     models.Problem.findById res.params.id, (err, problem) ->
       if err
         res.render('index.ejs', {locals:{mes:mes}})
