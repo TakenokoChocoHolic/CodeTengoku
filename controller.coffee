@@ -42,7 +42,7 @@ exports.start = (app) ->
                             return
                         if req.body.output == out
                             result = "ok"
-                       else
+                        else
                             result = "ng"
                             res.render('result.ejs', {locals:{
                                 result:result,
