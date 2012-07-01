@@ -52,5 +52,8 @@ exports.start = (app) ->
     res.render('debug.ejs', {locals:{mes:'debug'}})
 
   app.post '/problems', (req, res) ->
-    console.log(req.body)
-    res.render('debug.ejs', {locals:{mes:'hoge'}})
+    problem = new models.Problem
+    problem.title = req.body.title
+    problem.description = req.body.description
+    problem.date = new Date
+    res.render('debug.ejs', {locals:{mes:req.body.title}})
