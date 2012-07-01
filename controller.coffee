@@ -1,22 +1,18 @@
 models = require './models'
+ideone = require './ideone.coffee'
+
+user = 'exkazuu'
+pass = 'almond-choco'
 
 exports.start = (app) ->
   app.get '/', (req, res) ->
-    # Add new comment record for testing
-    comment = new models.Comment()
-    comment.body = "test"
-    comment.date = new Date
-    console.log(comment)
-    comment.save (err) ->
-      console.log('save.') if !err
-
-    problems = [1, 2, 3, 4, 5]
-    mes = "<p>hello world?</p>"
-
-    res.render('index.ejs', {locals:{
-        mes:mes,
-        problems:problems
-    }})
+    models.Problem.find {}, (err, docs) ->
+      mes = "<p>hello world?</p>"
+      problems = docs
+      res.render('index.ejs', {locals:{
+          mes:mes,
+          problems:problems
+      }})
 
 
   app.get '/login', (req, res) ->
@@ -40,8 +36,23 @@ exports.start = (app) ->
       res.render('problem.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/run', (req, res) ->
-    result = "ok"
-    res.render('result.ejs', {locals:{result:result}})
+    ide = new ideone.Ideone(user, pass);
+    ide.execute(4,
+                req.body.code,
+                req.body.input,
+                (success, out) ->
+                        if !success
+                            result = "ng"
+                            return
+                        if req.body.output == out
+                            result = "ok"
+                        else
+                            result = "ng"
+                            res.render('result.ejs', {locals:{
+                                result:result,
+                                out:out
+                            }})
+                )
 
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
@@ -62,7 +73,6 @@ exports.start = (app) ->
     problem.title = req.body.title
     problem.description = req.body.description
     problem.date = new Date
-    console.log(problem)
     problem.save (err) ->
-      console.log('save failed')
+      console.log('save failed') if err
     res.render('debug.ejs', {locals:{mes:req.body.title}})

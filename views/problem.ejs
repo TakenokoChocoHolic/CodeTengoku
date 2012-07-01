@@ -4,7 +4,7 @@
 
 <h2>Description</h2>
 <TEXTAREA cols="40" rows="6" wrap="off">
-  <%= problem.description_text %>
+  <%= problem.description %>
 </TEXTAREA>
 
 <br><br>
@@ -12,14 +12,14 @@
 <form action="/problems/<%= problem.id %>/run" method="post">
 Input:
 <br>
-<TEXTAREA cols="40" rows="2" wrap="off">
+<TEXTAREA cols="40" rows="2" wrap="off" name="input">
   <%= problem.input %>
 </TEXTAREA>
 <br><br>
 
 Output:
 <br>
-<TEXTAREA cols="40" rows="2" wrap="off">
+<TEXTAREA cols="40" rows="2" wrap="off" name="output">
   <%= problem.output %>
 </TEXTAREA>
 
@@ -27,8 +27,8 @@ Output:
 
 Code:
 <br>
-<TEXTAREA cols="40" rows="6" wrap="off">
-  <%= problem.first_message %>
+<TEXTAREA cols="40" rows="6" wrap="off" name="code">
+  <%= "print 3" %>
 </TEXTAREA>
 
 <br>
