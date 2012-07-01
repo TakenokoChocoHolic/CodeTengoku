@@ -35,8 +35,8 @@ var app = express.createServer(express.logger());
 app.get('/', function(req, res) {
     // Add new comment record for testing
     var comment = new Comment();
-    comment.body = sanitizedMsg;
-    comment.date = date;
+    comment.body = "test";
+    comment.date = new Date();
     comment.save(function(err) { 
         if ( !err ) console.log('save.');
     });
