@@ -16,6 +16,9 @@ exports.start = (app) ->
   app.get '/login', (req, res) ->
     res.render('login.ejs', {locals:{mes:''}})
 
+  app.get '/problem', (req, res) ->
+    res.render('problem.ejs', {locals:{mes:''}})
+
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
     res.render('index.ejs', {locals:{mes:mes}})
