@@ -1,13 +1,22 @@
+<% var data = ["problem"]; %>
+<% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
+
 <h1>Almond Choco</h1>
-<% var data = ["001", "002", "003"]; %>
 <ul>
   <% for(var i = 0; i < data.length; i++) { %>
     <li>
-      <a href='xxx/<%= data[i] %>' ><%= data[i] %></a>
+      <a href='/<%= data[i] %>' ><%= data[i] %></a>
     </li>
   <% } %>
 </ul>
 <% title = 'Hello, world' %>
+
+
+<%= copyright %>
+
+
+<!--
 <h1>TEST</h1>
-<%- mes %><!-- 普通に出力 -->
-<%= mes %><!-- エスケープして出力 -->
+<%- mes %>
+<%= mes %>
+-->
