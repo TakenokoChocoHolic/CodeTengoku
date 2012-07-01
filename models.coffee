@@ -3,40 +3,40 @@ mongoose = require('mongoose')
 # Define schemas
 Schema = mongoose.Schema
 
-commentSchema = new Schema
+Comment = new Schema
   text: String
   date: Date
 
-testCaseSchema = new Schema
+TestCase = new Schema
   inputText: String
   outputText: String
 
-submitSchema = new Schema
+Submit = new Schema
   code: String
-  comments: [commentSchema]
+  comments: [Comment]
   date: Date
 
-problemSchema = new Schema
+Problem = new Schema
   title: String
   description: String
-  testCases: [testCaseSchema]
-  comments: [commentSchema]
-  submits: [submitSchema]
+  testCases: [TestCase]
+  comments: [Comment]
+  submits: [Submit]
   date: Date
   
-userSchema = new Schema
+User = new Schema
   mailAddress: String
   password: String
   name: String
   salt: String
-  problems: [problemSchema]
+  problems: [Problem]
   
 schemas = [
-  {name: "Problem", schema: problemSchema},
-  {name: "TestCase", schema: testCaseSchema},
-  {name: "Submit", schema: submitSchema},
-  {name: "User", schema: userSchema},
-  {name: "Comment", schema: commentSchema},
+  {name: "Problem", schema: Problem},
+  {name: "TestCase", schema: TestCase},
+  {name: "Submit", schema: Submit},
+  {name: "User", schema: User},
+  {name: "Comment", schema: Comment},
 ]
 
 
