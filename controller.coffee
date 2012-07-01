@@ -1,4 +1,8 @@
 models = require './models'
+ideone = require './ideone.coffee'
+
+user = 'exkazuu'
+pass = 'almond-choco'
 
 exports.start = (app) ->
   app.get '/', (req, res) ->
@@ -36,7 +40,7 @@ exports.start = (app) ->
     res.render('problem.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/run', (req, res) ->
-    ide = new Ideone('username', 'pass');
+    ide = new ideone.Ideone(user, pass);
     ide.execute(4,
                 req.body.code,
                 req.body.input,
