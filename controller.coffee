@@ -14,7 +14,6 @@ exports.start = (app) ->
           problems:problems
       }})
 
-
   app.get '/login', (req, res) ->
     res.render('login.ejs', {locals:{mes:''}})
 
@@ -49,9 +48,6 @@ exports.start = (app) ->
   app.get '/problem_set', (req, res) ->
     mes = "<p>Problem set!</p>"
     res.render('index.ejs', {locals:{mes:mes}})
-
-  app.get '/funny_api', (req, res) ->
-    res.render('funny_api.ejs', {locals:{mes:''}})
 
   app.get '/debug', (req, res) ->
     console.log "load?"
