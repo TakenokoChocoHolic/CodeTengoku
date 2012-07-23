@@ -3,13 +3,13 @@
 <% first_message = "ask your matter!" %>
 <% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
 
-<h1>Almond Choco</h1>
-
 <h2>Issued Problems</h2>
 <ul>
   <% for(var i = 0; i < problems.length; i++) { %>
     <li>
-      <a href='/problem/<%= problems[i].id %>' ><%= problems[i].title %></a>
+      <%= problems[i].title %>
+      <a href='/problems/<%= problems[i].id %>/solve'>solve</a>
+      <a href='/problems/<%= problems[i].id %>/edit'>edit</a>
   <% } %>
 </ul>
 

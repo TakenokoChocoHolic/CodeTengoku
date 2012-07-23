@@ -1,0 +1,24 @@
+<% title = 'Problem' %>
+<% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
+<h1><%= problem.id %> - <%= problem.title %></h1>
+
+<h2>Description</h2>
+<pre><%= problem.description %></pre>
+
+<h2>Input</h2>
+<pre><%= problem.input %></pre>
+
+<h2>Output</h2>
+<pre><%= problem.output %></pre>
+
+<form action="/problems/<%= problem.id %>/solve" method="post">
+  <input type="hidden" name="output" value="<%= problem.output %>">
+
+  <h2>Your python code</h2>
+  <textarea cols="40" rows="6" wrap="off" name="code"></textarea>
+
+  <button type="submit">Submit</button>
+
+</form>
+
+<%= copyright %>

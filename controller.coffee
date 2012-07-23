@@ -17,15 +17,27 @@ exports.start = (app) ->
   app.get '/login', (req, res) ->
     res.render('login.ejs', {locals:{mes:''}})
 
-  app.get '/problem', (req, res) ->
-    res.render('problem.ejs', {locals:{mes:''}})
-
-  app.get '/problem/:id', (req, res) ->
+  app.get '/problems/:id/edit', (req, res) ->
     id = req.params.id
-    models.Problem.findById id, (err, docs) ->
-      res.render('problem.ejs', {locals:{problem:docs}})
+    models.Problem.findById id, (err, problem) ->
+      res.render('edit.ejs', {locals:{problem:problem}})
 
-  app.post '/problems/:id/run', (req, res) ->
+  app.post '/problems/:id/edit', (req, res) ->
+    id = req.params.id
+    models.Problem.findById id, (err, problem) ->
+      problem.description = req.body.description
+      problem.input = req.body.input
+      problem.output = req.body.output
+      problem.save (err) ->
+        console.log('edit failed') if err
+      res.render('edit.ejs', {locals:{problem:problem}})
+
+  app.get '/problems/:id/solve', (req, res) ->
+    id = req.params.id
+    models.Problem.findById id, (err, problem) ->
+      res.render('solve.ejs', {locals:{problem:problem}})
+
+  app.post '/problems/:id/solve', (req, res) ->
     ide = new ideone.Ideone(user, pass);
     ide.execute(4,
                 req.body.code,
@@ -44,10 +56,6 @@ exports.start = (app) ->
                                 ex:req.body.output
                         }})
                 )
-
-  app.get '/problem_set', (req, res) ->
-    mes = "<p>Problem set!</p>"
-    res.render('index.ejs', {locals:{mes:mes}})
 
   app.get '/debug', (req, res) ->
     console.log "load?"
