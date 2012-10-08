@@ -49,10 +49,11 @@ exports.start = (app) ->
       res.render('solve.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/solve', (req, res) ->
-    ide = new ideone.Ideone(user, pass);
-    ide.execute(parseInt(req.body.lang),
+    models.Problem.findById id, (err, problem) ->
+      ide = new ideone.Ideone(user, pass);
+      ide.execute(parseInt(req.body.lang),
                 req.body.code,
-                req.body.input,
+                problem.input,
                 (success, out) ->
                         if !success
                             result = "fail"
