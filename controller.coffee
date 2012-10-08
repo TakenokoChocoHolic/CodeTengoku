@@ -22,6 +22,12 @@ exports.start = (app) ->
     models.Problem.findById id, (err, problem) ->
       res.render('edit.ejs', {locals:{problem:problem}})
 
+  app.get '/problems/:id/delete', (req, res) ->
+    id = req.params.id
+    models.Problem.findById id, (err, problem) ->
+      problem.destroy
+      res.redirect "/"
+
   app.post '/problems/:id/edit', (req, res) ->
     id = req.params.id
     models.Problem.findById id, (err, problem) ->
@@ -74,3 +80,6 @@ exports.start = (app) ->
     problem.save (err) ->
       console.log('save failed') if err
     res.render('debug.ejs', {locals:{mes:req.body.title}})
+
+
+
