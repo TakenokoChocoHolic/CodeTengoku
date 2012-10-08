@@ -49,6 +49,7 @@ exports.start = (app) ->
       res.render('solve.ejs', {locals:{problem:problem}})
 
   app.post '/problems/:id/solve', (req, res) ->
+    id = req.params.id
     models.Problem.findById id, (err, problem) ->
       ide = new ideone.Ideone(user, pass);
       ide.execute(parseInt(req.body.lang),
