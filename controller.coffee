@@ -24,8 +24,7 @@ exports.start = (app) ->
 
   app.get '/problems/:id/delete', (req, res) ->
     id = req.params.id
-    models.Problem.findById id, (err, problem) ->
-      problem.destroy
+    models.Problem.findById id, (err) ->
       res.redirect "/"
 
   app.post '/problems/:id/edit', (req, res) ->
