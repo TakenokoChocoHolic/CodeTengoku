@@ -39,7 +39,7 @@ exports.start = (app) ->
 
   app.post '/problems/:id/solve', (req, res) ->
     ide = new ideone.Ideone(user, pass);
-    ide.execute(4,
+    ide.execute(parseInt(req.body.lang),
                 req.body.code,
                 req.body.input,
                 (success, out) ->
