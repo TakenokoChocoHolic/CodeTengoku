@@ -25,7 +25,7 @@ exports.start = (app) ->
   app.get '/problems/:id/delete', (req, res) ->
     id = req.params.id
     console.log "DELETE"
-    models.Problem.remove { id: id }, (err) ->
+    models.Problem.remove { _id: id }, (err) ->
       console.log "REMOVE"
       if !err
         console.log "OK"
