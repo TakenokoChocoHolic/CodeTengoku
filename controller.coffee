@@ -24,8 +24,14 @@ exports.start = (app) ->
 
   app.get '/problems/:id/delete', (req, res) ->
     id = req.params.id
-    models.Problem.findById id, (err) ->
-      res.redirect "/"
+    console.log "DELETE"
+    models.Problem.remove id, (err) ->
+      console.log "REMOVE"
+      if !err
+        console.log "OK"
+        res.redirect "/"
+      else
+        console.log "NG"
 
   app.post '/problems/:id/edit', (req, res) ->
     id = req.params.id
