@@ -1,8 +1,5 @@
 <% title = 'Hello, world' %>
 
-<% first_message = "ask your matter!" %>
-<% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
-
 <h2>Issued Problems</h2>
 <ul>
   <% for(var i = 0; i < problems.length; i++) { %>
@@ -15,7 +12,7 @@
 </ul>
 
 <h2>Issue New Problem</h2>
-<form action="problems" method="post">
+<form action="problems/new" method="post">
   title:<br><input name=title><br>
   description:<br><textarea name=description></textarea><br>
   input:<br><textarea name=input></textarea><br>
@@ -24,6 +21,3 @@
 </form>
 
 <br>
-
-<%= copyright %>
-

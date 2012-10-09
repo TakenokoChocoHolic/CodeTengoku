@@ -43,24 +43,24 @@ schemas = [
 
 
 # Initialize the uri for MongoDB
-uri = process.env.MONGOLAB_URI or 'mongodb:#localhost/mongo_data'
+uri = process.env.MONGOLAB_URI or 'mongodb://localhost/almond-choco'
 console.log(uri)
 
 # Set up a logger for mongoose
 for s in schemas
   s["schema"].pre 'init', (next) ->
-    console.log('initialized')
+    console.log('before init')
     next()
 
   s["schema"].pre 'save', (next) ->
-    console.log('pre save.')
+    console.log('before save')
     next()
 
 
 # Connect MongoDB (mongodb:#[hostname]/[dbname])
 mongoose.connect(uri)
 for s in schemas
-   mongoose.model(s["name"], s["schema"])
+  mongoose.model(s["name"], s["schema"])
 
 # Initialize model accessors
 exports.Comment = mongoose.model('Comment')
