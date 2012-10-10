@@ -1,6 +1,8 @@
-<% title = 'Hello, world' %>
+<% title = 'Issued Problems' %>
 
-<h2>Issued Problems</h2>
+<h1>Issued Problems</h1>
+<p>
+<a href='/problems/new'>create</a>
 <ul>
   <% for(var i = 0; i < problems.length; i++) { %>
     <li>
@@ -10,14 +12,4 @@
       <a href='/problems/<%= problems[i].id %>/delete'>delete</a>
   <% } %>
 </ul>
-
-<h2>Issue New Problem</h2>
-<form action="problems/new" method="post">
-  title:<br><input name=title><br>
-  description:<br><textarea name=description></textarea><br>
-  input:<br><textarea name=input></textarea><br>
-  output:<br><textarea name=output></textarea><br>
-  <button type="submit">submit</button>
-</form>
-
-<br>
+</p>

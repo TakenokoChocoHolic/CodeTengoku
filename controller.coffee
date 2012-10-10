@@ -12,6 +12,9 @@ exports.start = (app) ->
         problems: docs
       }})
 
+  app.get '/problems/new', (req, res) ->
+    res.render('new.ejs', {locals:{ }})
+
   app.post '/problems/new', (req, res) ->
     problem = new models.Problem
       title:       req.body.title
