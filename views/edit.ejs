@@ -1,21 +1,21 @@
 <% title = 'Problem' %>
 <% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
-<h1><%= problem.id %> - <%= problem.title %></h1>
+<!--POGEN,__pogen_0,problem_dot_id_,<%= problem.id %>--><!--POGEN,__pogen_0,problem_dot_title_,<%= problem.title %>--><h1 lang="__pogen_0"><%= problem.id %> - <%= problem.title %></h1>
 
-<form action="/problems/<%= problem.id %>/edit" method="post">
+<!--POGEN,__pogen_1,problem_dot_id_,<%= problem.id %>--><form action="/problems/<%= problem.id %>/edit" method="post" lang="__pogen_1">
 
   <h2>Description</h2>
-  <textarea cols="40" rows="6" wrap="off" name="description"><%= problem.description %></textarea>
+  <!--POGEN,__pogen_2,problem_dot_description_,<%= problem.description %>--><textarea cols="40" rows="6" wrap="off" name="description" lang="__pogen_2"><%= problem.description %></textarea>
 
   <h2>Input</h2>
-  <textarea cols="40" rows="2" wrap="off" name="input"><%= problem.input %></textarea>
+  <!--POGEN,__pogen_3,problem_dot_input_,<%= problem.input %>--><textarea cols="40" rows="2" wrap="off" name="input" lang="__pogen_3"><%= problem.input %></textarea>
 
   <h2>Output</h2>
-  <textarea cols="40" rows="2" wrap="off" name="output"><%= problem.output %></textarea>
+  <!--POGEN,__pogen_4,problem_dot_output_,<%= problem.output %>--><textarea cols="40" rows="2" wrap="off" name="output" lang="__pogen_4"><%= problem.output %></textarea>
 
   <br><br>
 
-  <button type="submit">Update</button>
+  <button type="submit" lang="__pogen_5">Update</button>
 
 </form>
 

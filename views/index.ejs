@@ -2,14 +2,14 @@
 
 <h1>Issued Problems</h1>
 <p>
-<a href='/problems/new'>create</a>
+<a href='/problems/new' lang="__pogen_6">create</a>
 <ul>
   <% for(var i = 0; i < problems.length; i++) { %>
-    <li>
+    <!--POGEN,__pogen_7,problems_i__dot_title_,<%= problems[i].title %>--><li lang="__pogen_7">
       <%= problems[i].title %>
-      <a href='/problems/<%= problems[i].id %>/solve'>solve</a>
-      <a href='/problems/<%= problems[i].id %>/edit'>edit</a>
-      <a href='/problems/<%= problems[i].id %>/delete'>delete</a>
+      <!--POGEN,__pogen_8,problems_i__dot_id_,<%= problems[i].id %>--><a href='/problems/<%= problems[i].id %>/solve' lang="__pogen_8">solve</a>
+      <!--POGEN,__pogen_9,problems_i__dot_id_,<%= problems[i].id %>--><a href='/problems/<%= problems[i].id %>/edit' lang="__pogen_9">edit</a>
+      <!--POGEN,__pogen_10,problems_i__dot_id_,<%= problems[i].id %>--><a href='/problems/<%= problems[i].id %>/delete' lang="__pogen_10">delete</a>
   <% } %>
 </ul>
 </p>

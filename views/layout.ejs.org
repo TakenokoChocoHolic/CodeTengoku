@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><a href="/">Almond Choco</a></h1>
+    <%- body %>
+    Copyright(C) 2012. Almond Choco Project
+  </body>
+</html>

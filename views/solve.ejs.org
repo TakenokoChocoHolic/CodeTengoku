@@ -1,22 +1,22 @@
 <% title = 'Problem' %>
 <% copyright = "Copyright(C) 2012. Almond Choco Project(仮)" %>
-<!--POGEN,__pogen_22,problem_dot_id_,<%= problem.id %>--><!--POGEN,__pogen_22,problem_dot_title_,<%= problem.title %>--><h1 lang="__pogen_22"><%= problem.id %> - <%= problem.title %></h1>
+<h1><%= problem.id %> - <%= problem.title %></h1>
 
 <h2>Description</h2>
-<!--POGEN,__pogen_23,problem_dot_description_,<%= problem.description %>--><pre lang="__pogen_23"><%= problem.description %></pre>
+<pre><%= problem.description %></pre>
 
 <h2>Input</h2>
-<!--POGEN,__pogen_24,problem_dot_input_,<%= problem.input %>--><pre lang="__pogen_24"><%= problem.input %></pre>
+<pre><%= problem.input %></pre>
 
 <h2>Output</h2>
-<!--POGEN,__pogen_25,problem_dot_output_,<%= problem.output %>--><pre lang="__pogen_25"><%= problem.output %></pre>
+<pre><%= problem.output %></pre>
 
-<!--POGEN,__pogen_26,problem_dot_id_,<%= problem.id %>--><form action="/problems/<%= problem.id %>/solve" method="post" lang="__pogen_26">
-  <!--POGEN,__pogen_27,problem_dot_output_,<%= problem.output %>--><input type="hidden" name="output" value="<%= problem.output %>" lang="__pogen_27">
+<form action="/problems/<%= problem.id %>/solve" method="post">
+  <input type="hidden" name="output" value="<%= problem.output %>">
 
   <h2>Your python code</h2>
 
-  <select name="lang" id="lang" lang="__pogen_28">
+  <select name="lang" id="lang">
     <option value="7" label="Ada"  title="Ada (gnat-4.3.2)" >Ada</option>
     <option value="45" label="Assembler"  title="Assembler (gcc-4.3.4)" >Assembler</option>
     <option value="13" label="Assembler"  title="Assembler (nasm-2.07)" >Assembler</option>
@@ -82,9 +82,9 @@
     <option value="6" label="Whitespace"  title="Whitespace (wspace 0.3)" >Whitespace</option>
   </select><br>
 
-  <textarea cols="40" rows="6" wrap="off" name="code" lang="__pogen_29"></textarea>
+  <textarea cols="40" rows="6" wrap="off" name="code"></textarea>
 
-  <button type="submit" lang="__pogen_30">Submit</button>
+  <button type="submit">Submit</button>
 
 </form>
 

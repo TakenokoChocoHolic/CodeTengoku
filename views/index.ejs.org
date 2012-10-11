@@ -1,0 +1,15 @@
+<% title = 'Issued Problems' %>
+
+<h1>Issued Problems</h1>
+<p>
+<a href='/problems/new'>create</a>
+<ul>
+  <% for(var i = 0; i < problems.length; i++) { %>
+    <li>
+      <%= problems[i].title %>
+      <a href='/problems/<%= problems[i].id %>/solve'>solve</a>
+      <a href='/problems/<%= problems[i].id %>/edit'>edit</a>
+      <a href='/problems/<%= problems[i].id %>/delete'>delete</a>
+  <% } %>
+</ul>
+</p>
