@@ -1,6 +1,7 @@
 _  = require 'underscore'
 
-# Import Underscore.string to separate object, because there are conflict functions (include, reverse, contains)
+# Import Underscore.string to separate object,
+# because there are conflict functions (include, reverse, contains)
 _.str = require 'underscore.string'
 
 # Mix in non-conflict functions to Underscore namespace if you want
@@ -10,6 +11,8 @@ normalize = (text) ->
   _.trim text.replace(/(\r\n)/g, '\n').replace(/(\r)/g, '\n')
 
 isCorrect = (actual, expected) ->
+  console.log normalize(expected)
+  console.log normalize(actual)
   normalize(actual) == normalize(expected)
 
 exports.isCorrect = isCorrect
