@@ -1,5 +1,4 @@
 rpc = require './jsonrpc'
-sys = require 'sys'
 
 class JsonRpcWrapper
   constructor: ->
@@ -29,18 +28,20 @@ class Ideone
         @details()
 
   details: ->
-    @call 'getSubmissionDetails', [@user, @pass, @link, false, false, true, true, true], (error, result) =>
-      @callback(true, result['output'])
+    @call 'getSubmissionDetails',
+      [@user, @pass, @link, false, false, true, true, true], (error, result) =>
+        @callback(true, result['output'])
 
   execute: (language, source, input, callback) ->
     @callback = callback
     @link = ''
-    @call 'createSubmission', [@user, @pass, source, language, input, true, false], (error, result) =>
-      if result['error'] == 'OK'
-        @link = result['link']
-        @wait()
-      else
-        console.log('failed to invoke createSubmission: ' + result['error'])
-        callback(false, '')
+    @call 'createSubmission',
+      [@user, @pass, source, language, input, true, false], (error, result) =>
+        if result['error'] == 'OK'
+          @link = result['link']
+          @wait()
+        else
+          console.log('failed to invoke createSubmission: ' + result['error'])
+          callback(false, '')
 
 exports.Ideone = Ideone
