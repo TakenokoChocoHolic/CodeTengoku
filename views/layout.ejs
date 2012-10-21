@@ -1,10 +1,20 @@
+<!DOCTYPE HTML>
 <html>
   <head>
+    <meta charset=utf-8>
     <title><%= title %></title>
   </head>
   <body>
+    <div id=header>
+      <% if(user_id) { %>
+        <%= user_id %>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+      <% } %>
+    </div>
     <h1><a href="/">Almond Choco</a></h1>
     <%- body %>
-    Copyright(C) 2012. Almond Choco Project
+    <div id=footer>Copyright(C) 2012. Almond Choco Project</div>
   </body>
 </html>

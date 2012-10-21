@@ -88,3 +88,14 @@ exports.start = (app) ->
       console.log "load!"
       console.log(docs)
     res.render('debug.ejs', {locals:{mes:'debug'}})
+
+  app.get '/login', (req, res) ->
+    res.render('login.ejs', {locals:{ }})
+
+  app.post '/login', (req, res) ->
+    req.session.user_id = req.body.user_id
+    res.redirect('/')
+
+  app.get '/logout', (req, res) ->
+    delete req.session.user_id
+    res.redirect('/')
