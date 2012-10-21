@@ -5,8 +5,8 @@
   title:<br><input name=title><br>
   description:<br><textarea name=description></textarea><br>
   <% for(var i = 0; i < 10; i++) { %>
-      input<%=i+1%>:<br><textarea name=input></textarea><br>
-      output<%=i+1%>:<br><textarea name=output></textarea><br>
+      input<%=i+1%>:<br><textarea name=input<%=i+1%>></textarea><br>
+      output<%=i+1%>:<br><textarea name=output<%=i+1%>></textarea><br>
   <% } %>
   <button type="submit">submit</button>
 </form>

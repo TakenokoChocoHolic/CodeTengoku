@@ -1,6 +1,7 @@
 models = require './models'
 ideone = require './ideone.coffee'
 judge = require './judge.coffee'
+$ = require 'JQDeferred'
 
 user = 'exkazuu'
 pass = 'almond-choco'
@@ -80,21 +81,28 @@ exports.start = (app) ->
     models.Problem.findById id, (err, problem) ->
       console.log 'failed to find Problem.' if err
       ide = new ideone.Ideone(user, pass)
-      ide.execute(parseInt(req.body.lang),
-        req.body.code, problem.testCases[0].input,
-        (success, out) ->
-          if !success
-            result = 'failed to execute'
-          else if judge.isCorrect(req.body.testCases[0].output, out)
-            result = 'OK'
-          else
-            result = 'NG'
-          res.render('result.ejs', {locals:{
-            result: result,
-            out:    out,
-            ex:     req.body.output
-          }})
-      )
+      judgeDeferred = (iTestCases) ->
+        dfd = $.Deferred()
+        ide.execute(parseInt(req.body.lang),
+          req.body.code, problem.testCases[iTestCases].input,
+          (success, out) ->
+            return dfd.resolve("out") if success else dfd.reject()
+            if !success
+              result = 'failed to execute'
+            else if judge.isCorrect(out, problem.testCases[iTestCases].output)
+              result = 'OK'
+            else
+              result = 'NG'
+            res.render('result.ejs', {locals:{
+              result: result,
+              out:    out,
+              ex:     req.body.output
+            }})
+        )
+        dfd.promise()
+      $.when(judgeDeferred(0))
+        .done (out1) -> console.log(out1)
+        .fail -> console.log("fail")
 
   app.get '/debug', (req, res) ->
     console.log "load?"
@@ -102,3 +110,14 @@ exports.start = (app) ->
       console.log "load!"
       console.log(docs)
     res.render('debug.ejs', {locals:{mes:'debug'}})
+
+  app.get '/login', (req, res) ->
+    res.render('login.ejs', {locals:{ }})
+
+  app.post '/login', (req, res) ->
+    req.session.user_id = req.body.user_id
+    res.redirect('/')
+
+  app.get '/logout', (req, res) ->
+    delete req.session.user_id
+    res.redirect('/')

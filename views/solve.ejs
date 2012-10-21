@@ -5,11 +5,13 @@
 <h2>Description</h2>
 <pre><%= problem.description %></pre>
 
-<h2>Input</h2>
-<pre><%= problem.input %></pre>
+<% for(var i = 0; i < problem.testCases.length; i++) { %>
+  <h2>Input<%= i+1 %></h2>
+  <pre><%= problem.testCases[i].input %></pre>
 
-<h2>Output</h2>
-<pre><%= problem.output %></pre>
+  <h2>Output<%= i+1 %></h2>
+  <pre><%= problem.testCases[i].output %></pre>
+<% } %>
 
 <form action="/problems/<%= problem.id %>/solve" method="post">
   <input type="hidden" name="output" value="<%= problem.output %>">
