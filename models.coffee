@@ -8,8 +8,8 @@ Comment = new Schema
   date: Date
 
 TestCase = new Schema
-  inputText: String
-  outputText: String
+  input: String
+  output: String
 
 Submit = new Schema
   code: String
@@ -19,8 +19,6 @@ Submit = new Schema
 Problem = new Schema
   title: String
   description: String
-  input: String
-  output: String
   testCases: [TestCase]
   comments: [Comment]
   submits: [Submit]

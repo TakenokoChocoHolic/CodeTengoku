@@ -1,5 +1,6 @@
 models = require './models'
 ideone = require './ideone.coffee'
+judge = require './judge.coffee'
 
 user = 'exkazuu'
 pass = 'almond-choco'
@@ -19,8 +20,11 @@ exports.start = (app) ->
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
-      input:       req.body.input
-      output:      req.body.output
+      testCases:   [
+        new models.TestCase
+          input:       req.body.input
+          output:      req.body.output
+      ]
       date:        new Date
     problem.save (err) ->
       console.log('failed to save Problem') if err
@@ -65,12 +69,9 @@ exports.start = (app) ->
         (success, out) ->
           if !success
             result = 'failed to execute'
-          else if req.body.output.replace(/(\r\n|\n\r|\n|\r)/g, '') ==
-                    out.replace(/(\r\n|\n\r|\n|\r)/g, '')
+          else if judge.isCorrect(req.body.output, out)
             result = 'OK'
           else
-            console.log req.body.output.replace(/(\r\n|\n\r|\n|\r)/g, '')
-            console.log out.replace(/(\r\n|\n\r|\n|\r)/g, '')
             result = 'NG'
           res.render('result.ejs', {locals:{
             result: result,
