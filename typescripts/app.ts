@@ -1,10 +1,11 @@
 ///<reference path='node/node.d.ts' />
+///<reference path='./' />
 
-import http = module("http")
-import url = module("url")
-import routes = module("./routes/index")
-import db = module("./db")
-import express = module("express")
+import http = module("http");
+import url = module("url");
+import routes = module("./routes/index");
+import db = module("./db");
+import express = module("express");
 
 var app = express.createServer();
 
