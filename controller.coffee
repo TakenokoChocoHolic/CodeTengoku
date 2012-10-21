@@ -18,6 +18,7 @@ exports.start = (app) ->
     res.render('new.ejs', {locals:{ }})
 
   app.post '/problems/new', (req, res) ->
+<<<<<<< HEAD
     input = []
     output = []
     for i in [1..10]
@@ -31,23 +32,33 @@ exports.start = (app) ->
     for i in [0..output.length - 1]
       testCases.push new models.TestCase(input: input[i], output: output[i])
 
+=======
+>>>>>>> 9ef6f5b8f82af9a818882cb3d4d89d53ec92145f
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
-      # testCases:   [
-      #   new models.TestCase
-      #     input:       req.body.input
-      #     output:      req.body.output
-      # ]
-      testCases:   testCases
       date:        new Date
+
+    inOuts = []
+    for i in [1..10]
+      if req.body['output' + i] != ""
+        inOuts.push [req.body['input' + i], req.body['output' + i]]
+
+    for i in [0..inOuts.length - 1]
+      testCase = new models.TestCase(input: inOuts[i][0], output: inOuts[i][1])
+      console.log(testCase)
+      problem.testCases.push testCase
+
     problem.save (err) ->
       console.log('failed to save Problem') if err
-      res.redirect '/'
+      models.Problem.findById problem.id, (err, problem) ->
+        console.log problem
+        res.redirect '/'
 
   app.get '/problems/:id/edit', (req, res) ->
     id = req.params.id
     models.Problem.findById id, (err, problem) ->
+      console.log problem
       console.log 'failed to find Problem.' if err
       res.render('edit.ejs', {locals:{problem:problem}})
 
