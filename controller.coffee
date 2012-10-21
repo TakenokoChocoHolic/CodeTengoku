@@ -29,9 +29,13 @@ exports.start = (app) ->
 
     testCases = []
     for i in [1..output.length]
-      testCases.push new models.TestCase(input: input[i], output: output[i])
+      testCase = new models.TestCase(input: input[i], output: output[i])
+      console.log testCase
+      testCase.save (err) ->
+      testCases.push testCase
      # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
     # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
+    console.log testCases
 
     problem = new models.Problem
       title:       req.body.title
@@ -43,13 +47,17 @@ exports.start = (app) ->
       # ]
       testCases:   testCases
       date:        new Date
+    console.log problem
     problem.save (err) ->
       console.log('failed to save Problem') if err
-      res.redirect '/'
+      models.Problem.findById problem.id, (err, problem) ->
+        console.log problem
+        res.redirect '/'
 
   app.get '/problems/:id/edit', (req, res) ->
     id = req.params.id
     models.Problem.findById id, (err, problem) ->
+      console.log problem
       console.log 'failed to find Problem.' if err
       res.render('edit.ejs', {locals:{problem:problem}})
 
