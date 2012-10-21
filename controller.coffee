@@ -16,21 +16,22 @@ exports.start = (app) ->
   app.get '/problems/new', (req, res) ->
     res.render('new.ejs', {locals:{ }})
 
-  input = []
-  output = []
-  for i in [1..10]
-    if req.body["input" + i] != "" and req.body["output" + i] != ""
-      input.push req.body["input" + i]
-      output.push req.body["output" + i]
-
-  testCases = []
-  len = input.length if input.length > output.length else output.length
-  for i in [1..len]
-    testCases.push new models.TestCase(input: input[i], output: output[i])
-   # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
-  # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
-
   app.post '/problems/new', (req, res) ->
+    input = []
+    output = []
+    for i in [1..10]
+      if typeof req.body['output' + i] isnt 'undefined'
+        input.push req.body['input' + i]
+        output.push req.body['output' + i]
+      else
+        break
+
+    testCases = []
+    for i in [1..output.length]
+      testCases.push new models.TestCase(input: input[i], output: output[i])
+     # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
+    # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
+
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
@@ -80,11 +81,11 @@ exports.start = (app) ->
       console.log 'failed to find Problem.' if err
       ide = new ideone.Ideone(user, pass)
       ide.execute(parseInt(req.body.lang),
-        req.body.code, problem.input,
+        req.body.code, problem.testCases[0].input,
         (success, out) ->
           if !success
             result = 'failed to execute'
-          else if judge.isCorrect(req.body.output, out)
+          else if judge.isCorrect(req.body.testCases[0].output, out)
             result = 'OK'
           else
             result = 'NG'
