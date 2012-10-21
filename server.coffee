@@ -1,5 +1,5 @@
 express    = require 'express'
-controller = require './controller'
+controller = require './controller.coffee'
 
 app = express.createServer(express.logger())
 app.configure ->
