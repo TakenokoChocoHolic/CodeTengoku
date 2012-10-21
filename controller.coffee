@@ -16,15 +16,30 @@ exports.start = (app) ->
   app.get '/problems/new', (req, res) ->
     res.render('new.ejs', {locals:{ }})
 
+  input = []
+  output = []
+  for i in [1..10]
+    if req.body["input" + i] != "" and req.body["output" + i] != ""
+      input.push req.body["input" + i]
+      output.push req.body["output" + i]
+
+  testCases = []
+  len = input.length if input.length > output.length else output.length
+  for i in [1..len]
+    testCases.push new models.TestCase(input: input[i], output: output[i])
+   # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
+  # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
+
   app.post '/problems/new', (req, res) ->
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
-      testCases:   [
-        new models.TestCase
-          input:       req.body.input
-          output:      req.body.output
-      ]
+      # testCases:   [
+      #   new models.TestCase
+      #     input:       req.body.input
+      #     output:      req.body.output
+      # ]
+      testCases:   testCases
       date:        new Date
     problem.save (err) ->
       console.log('failed to save Problem') if err

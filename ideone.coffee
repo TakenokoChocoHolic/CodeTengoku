@@ -1,5 +1,4 @@
 rpc = require './jsonrpc'
-sys = require 'sys'
 
 class JsonRpcWrapper
   constructor: ->
