@@ -69,7 +69,7 @@ exports.start = (app) ->
         (success, out) ->
           if !success
             result = 'failed to execute'
-          else if judge.isCorrect(req.body.testCases[0].output, out)
+          else if judge.isCorrect(out, problem.testCases[0].output)
             result = 'OK'
           else
             result = 'NG'
