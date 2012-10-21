@@ -72,6 +72,8 @@ exports.start = (app) ->
           else if judge.isCorrect(req.body.output, out)
             result = 'OK'
           else
+            console.log req.body.output.replace(/(\r\n|\n\r|\n|\r)/g, '')
+            console.log out.replace(/(\r\n|\n\r|\n|\r)/g, '')
             result = 'NG'
           res.render('result.ejs', {locals:{
             result: result,
