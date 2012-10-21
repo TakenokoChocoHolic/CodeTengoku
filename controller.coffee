@@ -18,32 +18,21 @@ exports.start = (app) ->
     res.render('new.ejs', {locals:{ }})
 
   app.post '/problems/new', (req, res) ->
-    input = []
-    output = []
-    for i in [1..10]
-      console.log req.body['output1']?
-      if req.body['output' + i]?
-        input.push req.body['input' + i]
-        output.push req.body['output' + i]
-      else
-        break
-
-    testCases = []
-    for i in [0..output.length - 1]
-      testCase = new models.TestCase(input: input[i], output: output[i])
-      console.log testCase
-      testCase.save (err) ->
-        console.log()
-      testCases.push testCase
-     # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
-    # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
-    console.log testCases
-
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
       date:        new Date
-    console.log problem
+
+    inOuts = []
+    for i in [1..10]
+      if req.body['output' + i] != ""
+        inOuts.push [req.body['input' + i], req.body['output' + i]]
+
+    for i in [0..inOuts.length - 1]
+      testCase = new models.TestCase(input: inOuts[i][0], output: inOuts[i][1])
+      console.log(testCase)
+      problem.testCases.push testCase
+
     problem.save (err) ->
       console.log('failed to save Problem') if err
       models.Problem.findById problem.id, (err, problem) ->
