@@ -65,9 +65,12 @@ exports.start = (app) ->
         (success, out) ->
           if !success
             result = 'failed to execute'
-          else if req.body.output.replace(/\s+$/, '') == out.replace(/\s+$/, '')
+          else if req.body.output.replace(/(\r\n|\n\r|\n|\r)/g, '') ==
+                    out.replace(/(\r\n|\n\r|\n|\r)/g, '')
             result = 'OK'
           else
+            console.log req.body.output.replace(/(\r\n|\n\r|\n|\r)/g, '')
+            console.log out.replace(/(\r\n|\n\r|\n|\r)/g, '')
             result = 'NG'
           res.render('result.ejs', {locals:{
             result: result,
@@ -82,4 +85,3 @@ exports.start = (app) ->
       console.log "load!"
       console.log(docs)
     res.render('debug.ejs', {locals:{mes:'debug'}})
-
