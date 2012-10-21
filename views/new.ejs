@@ -4,7 +4,9 @@
 <form action="/problems/new" method="post">
   title:<br><input name=title><br>
   description:<br><textarea name=description></textarea><br>
-  input:<br><textarea name=input></textarea><br>
-  output:<br><textarea name=output></textarea><br>
+  <% for(var i = 0; i < 10; i++) { %>
+      input<%=i+1%>:<br><textarea name=input></textarea><br>
+      output<%=i+1%>:<br><textarea name=output></textarea><br>
+  <% } %>
   <button type="submit">submit</button>
 </form>
