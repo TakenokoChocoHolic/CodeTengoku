@@ -65,15 +65,13 @@ exports.start = (app) ->
       console.log 'failed to find Problem.' if err
       ide = new ideone.Ideone(user, pass)
       ide.execute(parseInt(req.body.lang),
-        req.body.code, problem.input,
+        req.body.code, problem.testCases[0].input,
         (success, out) ->
           if !success
             result = 'failed to execute'
-          else if judge.isCorrect(req.body.output, out)
+          else if judge.isCorrect(req.body.testCases[0].output, out)
             result = 'OK'
           else
-            console.log req.body.output.replace(/(\r\n|\n\r|\n|\r)/g, '')
-            console.log out.replace(/(\r\n|\n\r|\n|\r)/g, '')
             result = 'NG'
           res.render('result.ejs', {locals:{
             result: result,

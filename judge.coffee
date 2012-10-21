@@ -10,6 +10,8 @@ normalize = (text) ->
   _.trim text.replace(/(\r\n)/g, '\n').replace(/(\r)/g, '\n')
 
 isCorrect = (actual, expected) ->
+  console.log normalize(expected)
+  console.log normalize(actual)
   normalize(actual) == normalize(expected)
 
 exports.isCorrect = isCorrect
