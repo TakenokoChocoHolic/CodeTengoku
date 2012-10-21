@@ -30,11 +30,6 @@ exports.start = (app) ->
     testCases = []
     for i in [0..output.length - 1]
       testCases.push new models.TestCase(input: input[i], output: output[i])
-      console.log testCases[i]["input" + i]
-      # console.log testCases[i]['output' + i]
-      # console.log testCases[i]
-     # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
-    # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
 
     problem = new models.Problem
       title:       req.body.title
