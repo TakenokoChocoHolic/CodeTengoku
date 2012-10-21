@@ -21,17 +21,19 @@ exports.start = (app) ->
     input = []
     output = []
     for i in [1..10]
-      if typeof req.body['output' + i] isnt 'undefined'
+      console.log req.body['output1']?
+      if req.body['output' + i]?
         input.push req.body['input' + i]
         output.push req.body['output' + i]
       else
         break
 
     testCases = []
-    for i in [1..output.length]
+    for i in [0..output.length - 1]
       testCase = new models.TestCase(input: input[i], output: output[i])
       console.log testCase
       testCase.save (err) ->
+        console.log()
       testCases.push testCase
      # input = (req.body["input" + i] for i in [1..10] if req.body["input" + i])
     # output = (req.body["output" + i] for i in [1..10] if req.body["output" + i])
@@ -40,12 +42,6 @@ exports.start = (app) ->
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
-      # testCases:   [
-      #   new models.TestCase
-      #     input:       req.body.input
-      #     output:      req.body.output
-      # ]
-      testCases:   testCases
       date:        new Date
     console.log problem
     problem.save (err) ->
