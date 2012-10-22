@@ -1,9 +1,13 @@
-[![Build Status](https://secure.travis-ci.org/TakenokoChocoHolic/almond-choco.png?branch=master)](http://travis-ci.org/TakenokoChocoHolic/almond-choco)
+[![Build Status](https://secure.travis-ci.org/TakenokoChocoHolic/CodeTengoku.png?branch=master)](http://travis-ci.org/TakenokoChocoHolic/almond-choco)
 
 # How to start developing
     git clone git@github.com:TakenokoChocoHolic/almond-choco.git
     cd almond-choco
     git remote add heroku git@heroku.com:almond-choco.git
+
+# How to compile
+    npm install -g typescript
+    make clean all
 
 # Push commits into GitHub repository
     git push
