@@ -1,3 +1,4 @@
+///<reference path='node/node.d.ts' />
 var mongoose: any = require('mongoose');
 
 // Initialize the uri for MongoDB

@@ -1,5 +1,3 @@
-///<reference path='node/node.d.ts' />
-
 import express = module('express');
 import controller = module('./controller');
 

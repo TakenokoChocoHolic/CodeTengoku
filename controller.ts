@@ -26,7 +26,7 @@ export function start(app) {
         });
 
         for (var i = 1; i <= 10; i++) {
-            if (req.body['output' + i] != "") {
+            if (!req.body['output' + i]) {
                 problem.testCases.push({input: req.body['input' + i], output: req.body['output' + i]});
             }
         }
@@ -84,14 +84,14 @@ export function start(app) {
                 var dfd = jqd.Deferred()
                 ide.execute(parseInt(req.body.lang),
                     req.body.code, problem.testCases[iTestCases].input,
-                    (success, out) => {
-                        if (success) {
+                    (out) => {
+                        if (out !== null) {
                             return dfd.resolve("out");
                         } else {
-                            dfd.reject();
+                            return dfd.reject();
                         }
                         var result;
-                        if (!success) {
+                        if (out === null) {
                             result = 'failed to execute';
                         } else if (judge.isCorrect(out, problem.testCases[iTestCases].output)) {
                             result = 'OK';

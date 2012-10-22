@@ -1,15 +1,16 @@
+///<reference path='node/node.d.ts' />
 import http = module("http");
 
 export class JSONRPCClient {
-    port: any;
-    host: any;
+    port: number;
+    host: string;
 
     constructor(port, host) {
         this.port = port;
         this.host = host;
     }
 
-    call(method, params, callback, errback, path) {
+    call(method: string, params: any[], callback: (p1: any, p2: any) => any, path: string) {
         // First we encode the request into JSON
         var requestJSON = JSON.stringify({
             'id': '' + (new Date()).getTime(),
@@ -22,7 +23,7 @@ export class JSONRPCClient {
             'Content-Length': requestJSON.length
         };
 
-        if(path===null) {
+        if (path === null) {
             path = '/';
         }
 

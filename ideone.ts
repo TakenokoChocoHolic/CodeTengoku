@@ -1,42 +1,31 @@
 import rpc = module("jsonrpc");
 
-class JsonRpcWrapper {
-    client: any;
-    path: any;
-    call: any;
-    constructor() {
-        this.client = new rpc.JSONRPCClient(80, 'indeone.com');
-        this.path = '/api/1/service.json';
-        this.call = (method, params, callback) =>
-            this.client.call(method, params, callback, null, this.path);
-    }
-}
-
 export class Ideone {
-    client: any;
-    path: any;
-    link: any;
-    callback: any;
-    constructor(public user, public pass) {
+    client: rpc.JSONRPCClient;
+    path: string;
+    link: string;
+    callback: (output: string) => void;
+
+    constructor(public user: string, public pass: string) {
         this.client = new rpc.JSONRPCClient(80, 'indeone.com');
         this.path = '/api/1/service.json';
     }
 
-    call(method, params, callback) {
-        return this.client.call(method, params, callback, null, this.path);
+    call(method: string, params: any[], callback: (p1: any, p2: any) => any): void {
+        this.client.call(method, params, callback, this.path);
     }
 
-    isAvailable(callback) {
-        return this.call('testFunction',
-                         [this.user, this.pass],
-                         (error, result) => callback(result['error'] == 'OK'));
+    isAvailable(callback: (result: bool) => void): void {
+        this.call('testFunction',
+                  [this.user, this.pass],
+                  (error, result) => callback(result['error'] === 'OK'));
     }
 
-    wait() {
+    wait(): void {
         this.call('getSubmissionStatus',
                   [this.user, this.pass, this.link],
                   function (error, result) {
-                      if(result['status'] != 0) {
+                      if (result['status'] !== 0) {
                           setTimeout(this.wait, 1000)
                       } else {
                           this.details()
@@ -48,24 +37,23 @@ export class Ideone {
     details() {
         this.call('getSubmissionDetails',
                   [this.user, this.pass, this.link, false, false, true, true, true],
-                  (error, result) =>
-                      this.callback(true, result['output'])
+                  (error, result) => this.callback(result['output'])
                  );
     }
 
-    execute(language, source, input, callback) {
+    execute(language: number, source: string, input: string, callback: (output: string) => void ) {
         this.callback = callback;
         this.link = '';
         this.call('createSubmission',
                   [this.user, this.pass, source, language, input, true, false],
                   function (error, result) {
-                      if(result['error'] == 'OK') {
+                      if (result['error'] === 'OK') {
                           this.link = result['link'];
                           this.wait();
                       } else {
                           console.log('failed to invoke createSubmission: ' +
                                       result['error']);
-                          callback(false, '');
+                          this.callback(null);
                       }
                   }
                  );
