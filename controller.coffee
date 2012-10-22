@@ -18,6 +18,18 @@ exports.start = (app) ->
     res.render('new.ejs', {locals:{ }})
 
   app.post '/problems/new', (req, res) ->
+    input = []
+    output = []
+    for i in [1..10]
+      if req.body['output' + i] != ""
+        input.push req.body['input' + i]
+        output.push req.body['output' + i]
+      else
+        break
+
+    testCases = []
+    for i in [0..output.length - 1]
+      testCases.push new models.TestCase(input: input[i], output: output[i])
 
     problem = new models.Problem
       title:       req.body.title
