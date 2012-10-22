@@ -13,6 +13,7 @@
         "mocha": "*"
       , "should": "*"
       , "sinon": "*"
+      , "typescript": "*"
     }
   , "scripts": {
         "test": "make clean all && mocha -t 10000"
