@@ -7,7 +7,7 @@ export class Ideone {
     callback: (output: string) => void;
 
     constructor(public user: string, public pass: string) {
-        this.client = new rpc.JSONRPCClient(80, 'indeone.com');
+        this.client = rpc.getClient(80, 'indeone.com');
         this.path = '/api/1/service.json';
     }
 
