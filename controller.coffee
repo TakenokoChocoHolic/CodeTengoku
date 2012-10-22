@@ -18,6 +18,7 @@ exports.start = (app) ->
     res.render('new.ejs', {locals:{ }})
 
   app.post '/problems/new', (req, res) ->
+
     problem = new models.Problem
       title:       req.body.title
       description: req.body.description
@@ -29,12 +30,18 @@ exports.start = (app) ->
         inOuts.push [req.body['input' + i], req.body['output' + i]]
 
     for i in [0..inOuts.length - 1]
-      testCase = new models.TestCase(input: inOuts[i][0], output: inOuts[i][1])
-      console.log(testCase)
-      problem.testCases.push testCase
+      #testCase = new models.TestCase(input: inOuts[i][0], output: inOuts[i][1])
+      #console.log(testCase)
+      problem.testCases.push {input: inOuts[i][0], output: inOuts[i][1]}
+      #testCase.save (err) ->
+      #  console.log("saved")
+      #console.log(testCase)
+
+    console.log(problem)
 
     problem.save (err) ->
       console.log('failed to save Problem') if err
+      console.log(problem)
       models.Problem.findById problem.id, (err, problem) ->
         console.log problem
         res.redirect '/'
