@@ -5,3 +5,4 @@ all:
 clean:
 	rm *.js
 	rm */*.js
+	git checkout jsonrpc.js
