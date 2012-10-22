@@ -1,4 +1,6 @@
+///<reference path='../node/node.d.ts' />
 ///<reference path='mocha.d.ts' />
+
 import assert = module('assert');
 import ideone = module('../ideone');
 

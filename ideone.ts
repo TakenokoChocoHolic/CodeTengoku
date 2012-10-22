@@ -1,7 +1,7 @@
 import rpc = module("jsonrpc");
 
 export class Ideone {
-    client: rpc.JSONRPCClient;
+    client: any;
     path: string;
     link: string;
     callback: (output: string) => void;
@@ -34,14 +34,14 @@ export class Ideone {
                  );
     }
 
-    details() {
+    details(): void {
         this.call('getSubmissionDetails',
                   [this.user, this.pass, this.link, false, false, true, true, true],
                   (error, result) => this.callback(result['output'])
                  );
     }
 
-    execute(language: number, source: string, input: string, callback: (output: string) => void ) {
+    execute(language: number, source: string, input: string, callback: (output: string) => void ): void {
         this.callback = callback;
         this.link = '';
         this.call('createSubmission',
