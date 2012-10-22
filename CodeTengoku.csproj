@@ -40,10 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="controller.ts" />
-    <Content Include="jsonrpc.d.ts" />
+    <Content Include="jsonrpc.ts" />
     <Content Include="express.d.ts" />
     <Content Include="ideone.ts" />
-    <Content Include="jsonrpc.js" />
     <Content Include="judge.ts" />
     <Content Include="models.ts" />
     <Content Include="node\HttpServer.ts" />
