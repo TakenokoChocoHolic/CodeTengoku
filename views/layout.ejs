@@ -6,7 +6,7 @@
   </head>
   <body>
     <div id=header>
-      <% if(user_id) { %>
+      <% if (typeof user_id !== "undefined" && user_id) { %>
         <%= user_id %>
         <a href="/logout">Logout</a>
       <% } else { %>

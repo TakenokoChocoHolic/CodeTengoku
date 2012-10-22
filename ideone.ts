@@ -1,8 +1,11 @@
-import rpc = module('./jsonprc')
+import rpc = module("jsonrpc");
 
 class JsonRpcWrapper {
+    client: any;
+    path: any;
+    call: any;
     constructor() {
-        this.client = rpc.getClient(80, 'indeone.com');
+        this.client = new rpc.JSONRPCClient(80, 'indeone.com');
         this.path = '/api/1/service.json';
         this.call = (method, params, callback) =>
             this.client.call(method, params, callback, null, this.path);
@@ -10,8 +13,12 @@ class JsonRpcWrapper {
 }
 
 export class Ideone {
+    client: any;
+    path: any;
+    link: any;
+    callback: any;
     constructor(public user, public pass) {
-        this.client = rpc.getClient(80, 'indeone.com');
+        this.client = new rpc.JSONRPCClient(80, 'indeone.com');
         this.path = '/api/1/service.json';
     }
 
@@ -64,3 +71,4 @@ export class Ideone {
                  );
     }
 }
+

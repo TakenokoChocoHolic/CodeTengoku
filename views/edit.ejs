@@ -7,11 +7,11 @@
   <h2>Description</h2>
   <textarea cols="40" rows="6" wrap="off" name="description"><%= problem.description %></textarea>
 
-  <% for(var i = 0; i < 1; i++) { %>
-      <h2>Input<%=i %></h2>
+  <% for(var i = 0; i < problem.testCases.length; i++) { %>
+      <h2>Input<%= i %></h2>
       <textarea cols="40" rows="2" wrap="off" name="input"><%= problem.testCases[i].input %></textarea>
 
-      <h2>Output<%=i %></h2>
+      <h2>Output<%= i %></h2>
       <textarea cols="40" rows="2" wrap="off" name="output"><%= problem.testCases[i].output %></textarea>
   <% } %>
 
