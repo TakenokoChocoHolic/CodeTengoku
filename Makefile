@@ -3,5 +3,4 @@ all:
 	tsc test/*.ts
 
 clean:
-	rm *.js
-	rm */*.js
+	rm -f **/*.js
