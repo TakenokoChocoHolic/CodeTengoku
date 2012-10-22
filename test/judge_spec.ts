@@ -1,6 +1,6 @@
 ///<reference path='mocha.d.ts' />
 import assert = module('assert');
-import judge = module('judge');
+import judge = module('../judge');
 
 describe('judge', () => {
     describe('#isCorrect()', () => {

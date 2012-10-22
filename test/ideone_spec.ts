@@ -1,6 +1,6 @@
 ///<reference path='mocha.d.ts' />
 import assert = module('assert');
-import ideone = module('ideone');
+import ideone = module('../ideone');
 
 var user = 'exkazuu'
 var pass = 'almond-choco'
