@@ -1,4 +1,4 @@
-import rpc = module("jsonrpc");
+var rpc: any = require("./jsonrpc");
 
 export class Ideone {
     client: any;
@@ -7,12 +7,12 @@ export class Ideone {
     callback: (output: string) => void;
 
     constructor(public user: string, public pass: string) {
-        this.client = rpc.getClient(80, 'indeone.com');
+        this.client = rpc.getClient(80, 'ideone.com');
         this.path = '/api/1/service.json';
     }
 
     call(method: string, params: any[], callback: (p1: any, p2: any) => any): void {
-        this.client.call(method, params, callback, this.path);
+        this.client.call(method, params, callback, null, this.path);
     }
 
     isAvailable(callback: (result: bool) => void): void {
