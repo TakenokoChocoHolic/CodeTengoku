@@ -1,7 +1,7 @@
 var express: any = require('express');
 import controller = module('./controller');
 
-var app = express();
+var app = express.createServer();
 app.configure(() => {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
