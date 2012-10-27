@@ -1,7 +1,7 @@
 import models = module('models');
 import ideone = module('ideone');
 import judge = module('judge');
-var jqd: any = require('JQDeferred');
+var Deffered: any = require('JQDeferred');
 
 var user = 'exkazuu';
 var pass = 'almond-choco';
@@ -81,7 +81,7 @@ export function start(app) {
             if (err) console.log('failed to find Problem.');
             var ide = new ideone.Ideone(user, pass);
             var judgeDeferred = (iTestCases) => {
-                var dfd = jqd.Deferred()
+                var dfd = Deferred()
                 ide.execute(parseInt(req.body.lang),
                     req.body.code, problem.testCases[iTestCases].input,
                     (out) => {
@@ -107,7 +107,7 @@ export function start(app) {
                 );
                 return dfd.promise();
             };
-            jqd.when(judgeDeferred(0))
+            Deffered.when(judgeDeferred(0))
                 .done((out1) => console.log(out1))
                 .fail(() => console.log("fail"))
         });

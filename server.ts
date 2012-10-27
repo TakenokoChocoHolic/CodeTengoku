@@ -5,6 +5,8 @@ var app = express.createServer();
 app.configure(() => {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: 'secret' }));
 });
 
 controller.start(app);
