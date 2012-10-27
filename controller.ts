@@ -135,5 +135,6 @@ export function start(app) {
 
     app.get('/logout', (req, res) => {
         delete req.session.user_id;
+        res.redirect('/');
     });
 }
