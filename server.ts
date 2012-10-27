@@ -1,7 +1,7 @@
 var express: any = require('express');
 import controller = module('./controller');
 
-var app = express.createServer();
+var app = express();
 app.configure(() => {
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -9,10 +9,17 @@ app.configure(() => {
   app.use(express.session({ secret: 'secret' }));
 });
 
+// for only express 2 (not 3)
 app.dynamicHelpers({
-  session: function(req, res) {
-    return req.session;
-  }
+    req: function(req, res) {
+      return req;
+    }
+  , session: function(req, res) {
+      return req.session;
+    }
+  , user_id: function(req, res) {
+      return req.session.user_id;
+    }
 });
 
 controller.start(app);
