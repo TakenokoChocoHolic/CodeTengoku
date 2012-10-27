@@ -1,4 +1,4 @@
-import express = module('express');
+var express: any = require('express');
 import controller = module('./controller');
 
 var app = express.createServer();

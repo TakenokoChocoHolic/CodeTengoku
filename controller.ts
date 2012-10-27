@@ -1,7 +1,7 @@
 import models = module('models');
 import ideone = module('ideone');
 import judge = module('judge');
-var Deffered: any = require('JQDeferred');
+var Deferred: any = require('JQDeferred');
 
 var user = 'exkazuu';
 var pass = 'almond-choco';
@@ -107,7 +107,7 @@ export function start(app) {
                 );
                 return dfd.promise();
             };
-            Deffered.when(judgeDeferred(0))
+            Deferred.when(judgeDeferred(0))
                 .done((out1) => console.log(out1))
                 .fail(() => console.log("fail"))
         });
