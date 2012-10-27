@@ -6,6 +6,8 @@
     git remote add heroku git@heroku.com:almond-choco.git
 
 # How to compile
+    cd CodeTengoku
+    npm install
     npm install -g typescript
     make clean all
 
