@@ -9,6 +9,12 @@ app.configure(() => {
   app.use(express.session({ secret: 'secret' }));
 });
 
+app.dynamicHelpers({
+  session: function(req, res) {
+    return req.session;
+  }
+});
+
 controller.start(app);
 var port = process.env.PORT || 5000;
 app.listen(port, () => {
