@@ -16,7 +16,8 @@
       , "typescript": "*"
     }
   , "scripts": {
-        "test": "make clean all && mocha -t 10000"
+        "start": "make clean all && node server.js"
+      , "test": "make clean all && mocha -t 10000"
     }
   , "engines": {
         "node": "0.8.x"

@@ -85,31 +85,33 @@ export function start(app) {
                 ide.execute(parseInt(req.body.lang),
                     req.body.code, problem.testCases[iTestCases].input,
                     (out) => {
-                        if (out !== null) {
-                            return dfd.resolve("out");
-                        } else {
-                            return dfd.reject();
-                        }
                         var result;
                         if (out === null) {
-                            result = 'failed to execute';
+                            return dfd.resolve('failed to execute');
                         } else if (judge.isCorrect(out, problem.testCases[iTestCases].output)) {
-                            result = 'OK';
+                            return dfd.resolve('OK');
                         } else {
-                            result = 'NG';
+                            return dfd.resolve('NG');
                         }
-                        res.render('result.ejs', {locals:{
-                            result: result,
-                            out:    out,
-                            ex:     req.body.output
-                        }});
                     }
                 );
                 return dfd.promise();
             };
-            Deferred.when(judgeDeferred(0))
-                .done((out1) => console.log(out1))
-                .fail(() => console.log("fail"))
+            var judges = []
+            for (var i = 0; i < problem.testCases.length; i++) {
+                judges.push(judgeDeferred(i));
+            }
+            Deferred.when(judges)
+                .done((out1) => {
+                    for (i = 0; i < arguments.length; i++) {
+                        console.log(arguments[i]);
+                    }
+                    res.render('result.ejs', {locals:{
+                        result: result,
+                        out:    out,
+                        ex:     req.body.output
+                    }});
+                });
         });
     });
 
