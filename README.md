@@ -1,8 +1,8 @@
 [![Build Status](https://secure.travis-ci.org/TakenokoChocoHolic/CodeTengoku.png?branch=master)](http://travis-ci.org/TakenokoChocoHolic/CodeTengoku)
 
 # How to start developing
-    git clone git@github.com:TakenokoChocoHolic/almond-choco.git
-    cd almond-choco
+    git clone git@github.com:TakenokoChocoHolic/CodeTengoku.git
+    cd CodeTengoku
     git remote add heroku git@heroku.com:almond-choco.git
 
 # How to compile
